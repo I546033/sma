@@ -1,0 +1,60 @@
+<mvc:View controllerName="tpl.deliveries.controller.main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+    xmlns="sap.m"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	class="viewPadding">
+    <Page id="page" title="{i18n>title}">
+        <!-- <content> -->
+    <l:VerticalLayout id="verticalLayout" >
+		<u:Calendar
+				id="calendar"
+				select="handleCalendarSelect"
+				intervalSelection="true"
+				weekNumberSelect="handleWeekNumberSelect"/>
+		<l:HorizontalLayout id="horizaontalLayout">
+			<Label id="startDate"
+					text="Selected From (yyyy-mm-dd):"
+					class="labelMarginLeft" />
+			<Text
+					id="selectedDateFrom"
+					text="No Date Selected"
+					class="labelMarginLeft"/>
+		</l:HorizontalLayout>
+		<l:HorizontalLayout id="horizaontalLayout2">
+			<Label id="endDate"
+					text="Selected To (yyyy-mm-dd):"
+					class="labelMarginLeft" />
+			<Text
+					id="selectedDateTo"
+					text="No Date Selected"
+					class="labelMarginLeft"/>
+		</l:HorizontalLayout>
+	</l:VerticalLayout>    
+	<smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="LineItemsSet" persistencyKey="SmartFilter_Explored">
+			<smartFilterBar:controlConfiguration>
+				<!-- <smartFilterBar:ControlConfiguration key="Bukrs"> -->
+					<!-- <smartFilterBar:defaultFilterValues> -->
+						<!-- <smartFilterBar:SelectOption low="0001">
+						</smartFilterBar:SelectOption>
+					</smartFilterBar:defaultFilterValues>
+				</smartFilterBar:ControlConfiguration> -->
+				<!-- <smartFilterBar:ControlConfiguration key="Gjahr">
+					<smartFilterBar:defaultFilterValues>
+						<smartFilterBar:SelectOption low="2014">
+						</smartFilterBar:SelectOption>
+					</smartFilterBar:defaultFilterValues>
+				</smartFilterBar:ControlConfiguration> -->
+			</smartFilterBar:controlConfiguration>
+		</smartFilterBar:SmartFilterBar>
+	<smartTable:SmartTable id="deliveriyTable" entitySet="OutboundDelivery" smartFilterId="smartFilterBar"
+			tableType="ResponsiveTable" beforeExport="onBeforeExport"
+			useVariantManagement="true" useTablePersonalisation="true" header="Line Items"
+			showRowCount="true" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
+			demandPopin="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true" editTogglable="true" app:useSmartToggle="true"
+			initiallyVisibleFields="vbeln"/>
+    </Page>
+</mvc:View>
